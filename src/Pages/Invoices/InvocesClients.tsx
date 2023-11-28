@@ -1,4 +1,4 @@
-export function Invoices() {
+export function InvoicesClients() {
     return (
         <div>Invoices</div>
     )

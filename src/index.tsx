@@ -4,8 +4,10 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { PageBody } from "./Components/PageBody/PageBody";
 import { Dashboard } from "./Pages/Dashboard/Dashboard";
 import Shipment from "./Pages/Shipment/Shipment";
-import { Invoices } from "./Pages/Invoices/Invoces";
-import { AccountStatement } from "./Pages/AccountStatements/AccountStatement";
+import { InvoicesClients } from "./Pages/Invoices/InvocesClients";
+import { InvoicesFarms } from "./Pages/Invoices/InvoicesFarms";
+import { AccountStatementClients } from "./Pages/AccountStatements/AccountStatementClients";
+import { AccountStatementFarms } from "./Pages/AccountStatements/AccountStatementFarms";
 import { Parameterization } from "./Pages/Parameterization/Parameterization";
 import { store, StoreContext } from "./Data/Store";
 import "./index.css";
@@ -36,18 +38,34 @@ const router = createBrowserRouter([
             ),
          },
          {
-            path: "/invoices",
+            path: "/invoices-clients",
             element: (
-               <PageBody text={"Invoices"}>
-                  <Invoices />
+               <PageBody text={"Invoices: Clients"}>
+                  <InvoicesClients />
                </PageBody>
             ),
          },
          {
-            path: "/account-statement",
+            path: "/invoices-farms",
             element: (
-               <PageBody text={"Account statement"}>
-                  <AccountStatement />
+               <PageBody text={"Invoices: Farms"}>
+                  <InvoicesFarms />
+               </PageBody>
+            ),
+         },
+         {
+            path: "/account-statement-clients",
+            element: (
+               <PageBody text={"Account statement: Clients"}>
+                  <AccountStatementClients />
+               </PageBody>
+            ),
+         },
+         {
+            path: "/account-statement-farms",
+            element: (
+               <PageBody text={"Account statement: Farms"}>
+                  <AccountStatementFarms />
                </PageBody>
             ),
          },

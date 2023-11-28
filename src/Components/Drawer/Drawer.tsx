@@ -15,6 +15,7 @@ import { AiFillDashboard } from "react-icons/ai";
 import { FaBox } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
 import { NavLink } from 'react-router-dom';
+import Menu from '../Menu/Menu';
 import './Drawer.css'
 
 interface DrawerProps {
@@ -91,59 +92,8 @@ export default function Drawer({ open, handleDrawerClose }: DrawerProps) {
                 </IconButton>
             </DrawerHeader>
             <Divider />
-            <List>
-                {['Dashboard',].map((text, index) => (
-                    <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-                        <ListItemButton
-                            component={NavLink}
-                            to={'/'}
-                            sx={{
-                                minHeight: 48,
-                                justifyContent: open ? 'initial' : 'center',
-                                px: 2.5,
-                            }}
-                        >
-                            <ListItemIcon
-                                sx={{
-                                    minWidth: 0,
-                                    mr: open ? 3 : 'auto',
-                                    justifyContent: 'center',
-                                }}
-                            >
-                                {index % 2 === 0 ? <AiFillDashboard /> : <MailIcon />}
-                            </ListItemIcon>
-                            <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-                        </ListItemButton>
-                    </ListItem>
-                ))}
-            </List>
+            <Menu open={open} />
             <Divider />
-            <List>
-                {menuItems.map((item, index) => (
-                    <ListItem key={item.text} disablePadding sx={{ display: 'block' }}>
-                        <ListItemButton
-                            component={NavLink}
-                            to={item.route}
-                            sx={{
-                                minHeight: 48,
-                                justifyContent: open ? 'initial' : 'center',
-                                px: 2.5,
-                            }}
-                        >
-                            <ListItemIcon
-                                sx={{
-                                    minWidth: 0,
-                                    mr: open ? 3 : 'auto',
-                                    justifyContent: 'center',
-                                }}
-                            >
-                                {index % 4 === 0 ? <FaBox /> : (index % 4 === 1 ? <IoMdSettings /> : <IoMdSettings />)}
-                            </ListItemIcon>
-                            <ListItemText primary={item.text} sx={{ opacity: open ? 1 : 0 }} />
-                        </ListItemButton>
-                    </ListItem>
-                ))}
-            </List>
             <Divider />
         </DrawerWrapper>
     )
