@@ -20,36 +20,10 @@ import Switch from "@mui/material/Switch";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
+import { observer } from "mobx-react";
+import { ShipmentModel } from "../../Models/Shipment";
 
-interface Data {
-   id: number;
-   pais: string;
-   tpFlor: string;
-   cajas: number;
-   tpCaja: string;
-   variedad: string;
-   long: number;
-   tallos: number;
-   finca: string;
-   fchOut: string;
-   compra: number;
-   ttCompra: number;
-   marca: string;
-   cargoAg: string;
-   truck: string;
-   dif: string;
-   venta: number;
-   ttVenta: number;
-   awb: string;
-   invoice: string;
-   miami: number;
-   ttMiami: number;
-   orden: string;
-   creador: string;
-   ejecutor: string;
-}
-
-function createData(data: Partial<Data>): Data {
+function createData(data: Partial<ShipmentModel>): ShipmentModel {
    return {
       id: data.id || 0,
       pais: data.pais || "",
@@ -204,7 +178,7 @@ function stableSort<T>(
 
 interface HeadCell {
    disablePadding: boolean;
-   id: keyof Data;
+   id: keyof ShipmentModel;
    label: string;
    numeric: boolean;
 }
@@ -240,7 +214,7 @@ interface EnhancedTableProps {
    numSelected: number;
    onRequestSort: (
       event: React.MouseEvent<unknown>,
-      property: keyof Data
+      property: keyof ShipmentModel
    ) => void;
    onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
    order: Order;
@@ -258,7 +232,7 @@ function EnhancedTableHead(props: EnhancedTableProps) {
       onRequestSort,
    } = props;
    const createSortHandler =
-      (property: keyof Data) => (event: React.MouseEvent<unknown>) => {
+      (property: keyof ShipmentModel) => (event: React.MouseEvent<unknown>) => {
          onRequestSort(event, property);
       };
 
@@ -312,7 +286,7 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
    return (
       <Toolbar
          sx={{
-            marginTop: "50px",
+            marginTop: "20px",
             pl: { sm: 2 },
             pr: { xs: 1, sm: 1 },
             ...(numSelected > 0 && {
@@ -340,7 +314,7 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
                id="tableTitle"
                component="div"
             >
-               Таблица Shipment
+               Shipment
             </Typography>
          )}
          {numSelected > 0 ? (
@@ -362,7 +336,7 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
 
 export default function Shipment() {
    const [order, setOrder] = React.useState<Order>("asc");
-   const [orderBy, setOrderBy] = React.useState<keyof Data>("cajas");
+   const [orderBy, setOrderBy] = React.useState<keyof ShipmentModel>("cajas");
    const [selected, setSelected] = React.useState<readonly number[]>([]);
    const [page, setPage] = React.useState(0);
    const [dense, setDense] = React.useState(false);
@@ -370,7 +344,7 @@ export default function Shipment() {
 
    const handleRequestSort = (
       event: React.MouseEvent<unknown>,
-      property: keyof Data
+      property: keyof ShipmentModel
    ) => {
       const isAsc = orderBy === property && order === "asc";
       setOrder(isAsc ? "desc" : "asc");

@@ -1,0 +1,27 @@
+export type ShipmentModel = {
+  id: number;
+  pais: string;
+  tpFlor: string;
+  cajas: number;
+  tpCaja: string;
+  variedad: string;
+  long: number;
+  tallos: number;
+  finca: string;
+  fchOut: string;
+  compra: number;
+  ttCompra: number;
+  marca: string;
+  cargoAg: string;
+  truck: string;
+  dif: string;
+  venta: number;
+  ttVenta: number;
+  awb: string;
+  invoice: string;
+  miami: number;
+  ttMiami: number;
+  orden: string;
+  creador: string;
+  ejecutor: string;
+};

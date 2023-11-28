@@ -10,10 +10,12 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import MailIcon from '@mui/icons-material/Mail';
+import Typography from "@mui/material/Typography";
 import { AiFillDashboard } from "react-icons/ai";
 import { FaBox } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
 import { NavLink } from 'react-router-dom';
+import './Drawer.css'
 
 interface DrawerProps {
     open: boolean;
@@ -46,7 +48,7 @@ const closedMixin = (theme: Theme): CSSObject => ({
 const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
@@ -81,8 +83,9 @@ export default function Drawer({ open, handleDrawerClose }: DrawerProps) {
 
     return (
         <DrawerWrapper variant="permanent" open={open}>
-
             <DrawerHeader>
+                <img className='logo-img' src={require("../../Assets/logo_awarmatu.png")} alt="logo" />
+                <Typography>AWARMATU <br /> SYSTEM 23</Typography>
                 <IconButton onClick={handleDrawerClose}>
                     {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
                 </IconButton>
