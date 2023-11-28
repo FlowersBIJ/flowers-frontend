@@ -3,7 +3,7 @@ import App from "./App";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { PageBody } from "./Components/PageBody/PageBody";
 import { Dashboard } from "./Pages/Dashboard/Dashboard";
-import { Shipment } from "./Pages/Shipment/Shipment";
+import Shipment from "./Pages/Shipment/Shipment";
 import { Invoices } from "./Pages/Invoices/Invoces";
 import { AccountStatement } from "./Pages/AccountStatements/AccountStatement";
 import { Parameterization } from "./Pages/Parameterization/Parameterization";
