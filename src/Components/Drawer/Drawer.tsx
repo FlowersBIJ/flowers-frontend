@@ -1,20 +1,10 @@
 import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
 import MuiDrawer from '@mui/material/Drawer';
-import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import MailIcon from '@mui/icons-material/Mail';
 import Typography from "@mui/material/Typography";
-import { AiFillDashboard } from "react-icons/ai";
-import { FaBox } from "react-icons/fa";
-import { IoMdSettings } from "react-icons/io";
-import { NavLink } from 'react-router-dom';
 import Menu from '../Menu/Menu';
 import './Drawer.css'
 
@@ -75,13 +65,6 @@ const DrawerWrapper = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 
 export default function Drawer({ open, handleDrawerClose }: DrawerProps) {
     const theme = useTheme();
 
-    const menuItems = [
-        { text: 'Shipment', route: '/shipment' },
-        { text: 'Invoices', route: '/invoices' },
-        { text: 'Account statement', route: '/account-statement' },
-        { text: 'Parameterization', route: '/parameterization' },
-    ];
-
     return (
         <DrawerWrapper variant="permanent" open={open}>
             <DrawerHeader>
@@ -93,7 +76,6 @@ export default function Drawer({ open, handleDrawerClose }: DrawerProps) {
             </DrawerHeader>
             <Divider />
             <Menu open={open} />
-            <Divider />
             <Divider />
         </DrawerWrapper>
     )
