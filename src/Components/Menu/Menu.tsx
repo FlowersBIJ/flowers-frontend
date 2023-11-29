@@ -1,12 +1,14 @@
-import { useTheme } from '@mui/material/styles';
+import { useState, useEffect } from 'react';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { AiFillDashboard } from "react-icons/ai";
-import { FaBox } from "react-icons/fa";
-import { IoMdSettings } from "react-icons/io";
+import Collapse from '@mui/material/Collapse';
+import Divider from '@mui/material/Divider';
+import { AiFillDashboard } from 'react-icons/ai';
+import { FaBox } from 'react-icons/fa';
+import { IoMdSettings } from 'react-icons/io';
 import { NavLink } from 'react-router-dom';
 
 interface DrawerProps {
@@ -14,7 +16,22 @@ interface DrawerProps {
 }
 
 export default function Menu({ open }: DrawerProps) {
-    const theme = useTheme();
+    const [invoicesOpen, setInvoicesOpen] = useState(false);
+    const [accountStatementsOpen, setAccountStatementsOpen] = useState(false);
+
+    const handleInvoicesClick = () => {
+        setInvoicesOpen(!invoicesOpen);
+    };
+
+    const handleAccountStatementsClick = () => {
+        setAccountStatementsOpen(!accountStatementsOpen);
+    };
+
+    useEffect(() => {
+        // Закрыть "Invoices" и "Account Statements" при закрытии "Drawer"
+        setInvoicesOpen(false);
+        setAccountStatementsOpen(false);
+    }, [open]);
 
     const Ivoices = [
         { text: 'Clients', route: '/invoices-clients' },
@@ -28,7 +45,7 @@ export default function Menu({ open }: DrawerProps) {
 
     return (
         <List>
-            {["Dashboard",].map((text) => (
+            {['Dashboard'].map((text) => (
                 <ListItem key={text} disablePadding sx={{ display: 'block' }}>
                     <ListItemButton
                         component={NavLink}
@@ -52,11 +69,8 @@ export default function Menu({ open }: DrawerProps) {
                     </ListItemButton>
                 </ListItem>
             ))}
-            <ListItemText primary={"Menu"} sx={{
-                opacity: open ? 1 : 0,
-                px: 2.5,
-            }} />
-            {["Shipment",].map((text) => (
+            <Divider />
+            {['Shipment'].map((text) => (
                 <ListItem key={text} disablePadding sx={{ display: 'block' }}>
                     <ListItemButton
                         component={NavLink}
@@ -80,15 +94,109 @@ export default function Menu({ open }: DrawerProps) {
                     </ListItemButton>
                 </ListItem>
             ))}
-            <ListItemText primary={"Invoices"} sx={{
-                opacity: open ? 1 : 0,
-                px: 2.5,
-            }} />
-            {Ivoices.map((item, index) => (
-                <ListItem key={item.text} disablePadding sx={{ display: 'block' }}>
+
+            {/* Invoices Section */}
+            <ListItemButton
+                sx={{
+                    minHeight: 48,
+                    justifyContent: open ? 'initial' : 'center',
+                    px: 2.8,
+                }}
+                onClick={handleInvoicesClick}
+            >
+                <ListItemIcon
+                    sx={{
+                        minWidth: 0,
+                        mr: open ? 3 : 'auto',
+                        justifyContent: 'center',
+                    }}
+                >
+                    {invoicesOpen ? <IoMdSettings /> : <IoMdSettings style={{ opacity: 0.5 }} />}
+                </ListItemIcon>
+                <ListItemText primary={'Invoices'} sx={{ opacity: open ? 1 : 0 }} />
+            </ListItemButton>
+            <Collapse in={invoicesOpen} timeout="auto" unmountOnExit>
+                <List component="div" disablePadding>
+                    {Ivoices.map((item) => (
+                        <ListItem key={item.text} disablePadding sx={{ display: 'block' }}>
+                            <ListItemButton
+                                component={NavLink}
+                                to={item.route}
+                                sx={{
+                                    minHeight: 48,
+                                    justifyContent: open ? 'initial' : 'center',
+                                    px: 4,
+                                }}
+                            >
+                                <ListItemIcon
+                                    sx={{
+                                        minWidth: 0,
+                                        mr: open ? 3 : 'auto',
+                                        justifyContent: 'center',
+                                    }}
+                                >
+                                    <IoMdSettings />
+                                </ListItemIcon>
+                                <ListItemText primary={item.text} sx={{ opacity: open ? 1 : 0 }} />
+                            </ListItemButton>
+                        </ListItem>
+                    ))}
+                </List>
+            </Collapse>
+
+            {/* Account Statements Section */}
+            <ListItemButton
+                sx={{
+                    minHeight: 48,
+                    justifyContent: open ? 'initial' : 'center',
+                    px: 2.8,
+                }}
+                onClick={handleAccountStatementsClick}
+            >
+                <ListItemIcon
+                    sx={{
+                        minWidth: 0,
+                        mr: open ? 3 : 'auto',
+                        justifyContent: 'center',
+                    }}
+                >
+                    {accountStatementsOpen ? <IoMdSettings /> : <IoMdSettings style={{ opacity: 0.5 }} />}
+                </ListItemIcon>
+                <ListItemText primary={'Account statements'} sx={{ opacity: open ? 1 : 0 }} />
+            </ListItemButton>
+            <Collapse in={accountStatementsOpen} timeout="auto" unmountOnExit>
+                <List component="div" disablePadding>
+                    {AccountStatements.map((item) => (
+                        <ListItem key={item.text} disablePadding sx={{ display: 'block' }}>
+                            <ListItemButton
+                                component={NavLink}
+                                to={item.route}
+                                sx={{
+                                    minHeight: 48,
+                                    justifyContent: open ? 'initial' : 'center',
+                                    px: 4,
+                                }}
+                            >
+                                <ListItemIcon
+                                    sx={{
+                                        minWidth: 0,
+                                        mr: open ? 3 : 'auto',
+                                        justifyContent: 'center',
+                                    }}
+                                >
+                                    <IoMdSettings />
+                                </ListItemIcon>
+                                <ListItemText primary={item.text} sx={{ opacity: open ? 1 : 0 }} />
+                            </ListItemButton>
+                        </ListItem>
+                    ))}
+                </List>
+            </Collapse>
+            {['Parameterization'].map((text) => (
+                <ListItem key={text} disablePadding sx={{ display: 'block' }}>
                     <ListItemButton
                         component={NavLink}
-                        to={item.route}
+                        to={'/parameterization'}
                         sx={{
                             minHeight: 48,
                             justifyContent: open ? 'initial' : 'center',
@@ -102,41 +210,12 @@ export default function Menu({ open }: DrawerProps) {
                                 justifyContent: 'center',
                             }}
                         >
-                            {index % 2 === 0 ? <IoMdSettings /> : <IoMdSettings />}
+                            <IoMdSettings />
                         </ListItemIcon>
-                        <ListItemText primary={item.text} sx={{ opacity: open ? 1 : 0 }} />
-                    </ListItemButton>
-                </ListItem>
-            ))}
-            <ListItemText primary={"Account statements"} sx={{
-                opacity: open ? 1 : 0,
-                px: 2.8,
-            }} />
-            {AccountStatements.map((item, index) => (
-                <ListItem key={item.text} disablePadding sx={{ display: 'block' }}>
-                    <ListItemButton
-                        component={NavLink}
-                        to={item.route}
-                        sx={{
-                            minHeight: 48,
-                            justifyContent: open ? 'initial' : 'center',
-                            px: 2.6,
-                        }}
-                    >
-                        <ListItemIcon
-                            sx={{
-                                minWidth: 0,
-                                mr: open ? 3 : 'auto',
-                                justifyContent: 'center',
-                            }}
-                        >
-                            {index % 2 === 0 ? <IoMdSettings /> : <IoMdSettings />}
-                        </ListItemIcon>
-                        <ListItemText primary={item.text} sx={{ opacity: open ? 1 : 0 }} />
+                        <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
                     </ListItemButton>
                 </ListItem>
             ))}
         </List>
-
-    )
+    );
 }

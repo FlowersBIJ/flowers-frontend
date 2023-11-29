@@ -6,6 +6,10 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import Typography from "@mui/material/Typography";
 import Menu from '../Menu/Menu';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import { IoMdAdd } from "react-icons/io";
+import { NavLink } from 'react-router-dom';
 import './Drawer.css'
 
 interface DrawerProps {
@@ -41,12 +45,14 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     alignItems: 'center',
     justifyContent: 'space-between',
     padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
     ...theme.mixins.toolbar,
 }));
 
 const DrawerWrapper = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
     ({ theme, open }) => ({
+        display: "flex",
+        flexDirection: 'column',
+        justifyContent: 'space-between',
         width: drawerWidth,
         flexShrink: 0,
         whiteSpace: 'nowrap',
@@ -67,16 +73,42 @@ export default function Drawer({ open, handleDrawerClose }: DrawerProps) {
 
     return (
         <DrawerWrapper variant="permanent" open={open}>
-            <DrawerHeader>
-                <img className='logo-img' src={require("../../Assets/logo_awarmatu.png")} alt="logo" />
-                <Typography>AWARMATU <br /> SYSTEM 23</Typography>
-                <IconButton onClick={handleDrawerClose}>
-                    {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-                </IconButton>
-            </DrawerHeader>
-            <Divider />
-            <Menu open={open} />
-            <Divider />
+            <div className="upper-drawer">
+                <DrawerHeader>
+                    <img className='logo-img' src={require("../../Assets/logo_awarmatu.png")} alt="logo" />
+                    <Typography >AWARMATU <br /> SYSTEM 23</Typography>
+                    <IconButton onClick={handleDrawerClose}>
+                        {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+                    </IconButton>
+                </DrawerHeader>
+                <Divider />
+                <Menu open={open} />
+                <Divider />
+            </div>
+            <div style={{ marginTop: 'auto', marginBottom: '30px' }} className="under-drawer">
+                <Stack
+                    sx={{
+                        minHeight: 48,
+                        alignSelf: "flex-end",
+                        justifyContent: open ? 'center' : 'center',
+                        px: 2.8,
+                    }}
+                    spacing={2} direction="row">
+                    <Button
+                        component={NavLink}
+                        to={"/new-order"}
+                        variant="contained"
+                        sx={{
+                            backgroundColor: "#4e73df",
+                            '&:hover': {
+                                backgroundColor: "#3b5cb8",
+                            },
+                        }}
+                    >
+                        {open ? "Add new order" : <IoMdAdd />}
+                    </Button>
+                </Stack>
+            </div>
         </DrawerWrapper>
     )
 }

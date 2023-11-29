@@ -9,6 +9,7 @@ import { InvoicesFarms } from "./Pages/Invoices/InvoicesFarms";
 import { AccountStatementClients } from "./Pages/AccountStatements/AccountStatementClients";
 import { AccountStatementFarms } from "./Pages/AccountStatements/AccountStatementFarms";
 import { Parameterization } from "./Pages/Parameterization/Parameterization";
+import { NewOrderForm } from "./Pages/NewOrderForm/NewOrderForm";
 import { store, StoreContext } from "./Data/Store";
 import "./index.css";
 import { TextProvider } from "./Components/TextContext/TextContext";
@@ -24,7 +25,7 @@ const router = createBrowserRouter([
          {
             index: true,
             element: (
-               <PageBody text={"Dashboard"}>
+               <PageBody text={"DASHBOARD"}>
                   <Dashboard />
                </PageBody>
             ),
@@ -32,7 +33,7 @@ const router = createBrowserRouter([
          {
             path: "/shipment",
             element: (
-               <PageBody text={"Shipment"}>
+               <PageBody text={"SHIPMENT"}>
                   <Shipment />
                </PageBody>
             ),
@@ -40,7 +41,7 @@ const router = createBrowserRouter([
          {
             path: "/invoices-clients",
             element: (
-               <PageBody text={"Invoices: Clients"}>
+               <PageBody text={"INVOICES: CLIENTS"}>
                   <InvoicesClients />
                </PageBody>
             ),
@@ -48,7 +49,7 @@ const router = createBrowserRouter([
          {
             path: "/invoices-farms",
             element: (
-               <PageBody text={"Invoices: Farms"}>
+               <PageBody text={"INVOICES: FARMS"}>
                   <InvoicesFarms />
                </PageBody>
             ),
@@ -56,7 +57,7 @@ const router = createBrowserRouter([
          {
             path: "/account-statement-clients",
             element: (
-               <PageBody text={"Account statement: Clients"}>
+               <PageBody text={"ACCOUNT STATEMENT: CLIENTS"}>
                   <AccountStatementClients />
                </PageBody>
             ),
@@ -64,7 +65,7 @@ const router = createBrowserRouter([
          {
             path: "/account-statement-farms",
             element: (
-               <PageBody text={"Account statement: Farms"}>
+               <PageBody text={"ACCOUNT STATEMENT: FARMS"}>
                   <AccountStatementFarms />
                </PageBody>
             ),
@@ -72,8 +73,16 @@ const router = createBrowserRouter([
          {
             path: "/parameterization",
             element: (
-               <PageBody text={"Parameterization"}>
+               <PageBody text={"PARAMETERIZATION"}>
                   <Parameterization />
+               </PageBody>
+            ),
+         },
+         {
+            path: "/new-order",
+            element: (
+               <PageBody text={"NEW ORDER"}>
+                  <NewOrderForm />
                </PageBody>
             ),
          },
