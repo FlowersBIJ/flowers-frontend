@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  useContext,
-  ReactNode,
-  Dispatch,
-  SetStateAction,
-} from "react";
+import { createContext, useContext, Dispatch, SetStateAction } from "react";
 
 type PageContextType = Dispatch<SetStateAction<string | undefined>>;
 

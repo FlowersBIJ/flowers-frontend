@@ -1,6 +1,7 @@
-export type ShipmentModel = {
+export type NewOrderFormModel = {
   id: number;
   country: string;
+  cityOfDelivery: string;
   flowerType: string;
   numberOfBoxes: number;
   boxType: string;

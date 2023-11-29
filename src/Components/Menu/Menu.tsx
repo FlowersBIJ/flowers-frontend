@@ -5,8 +5,6 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Collapse from '@mui/material/Collapse';
-import Divider from '@mui/material/Divider';
-import { AiFillDashboard } from 'react-icons/ai';
 import { FaBox } from 'react-icons/fa';
 import { IoMdSettings } from 'react-icons/io';
 import { NavLink } from 'react-router-dom';
@@ -28,7 +26,6 @@ export default function Menu({ open }: DrawerProps) {
     };
 
     useEffect(() => {
-        // Закрыть "Invoices" и "Account Statements" при закрытии "Drawer"
         setInvoicesOpen(false);
         setAccountStatementsOpen(false);
     }, [open]);
@@ -45,36 +42,11 @@ export default function Menu({ open }: DrawerProps) {
 
     return (
         <List>
-            {['Dashboard'].map((text) => (
-                <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-                    <ListItemButton
-                        component={NavLink}
-                        to={'/'}
-                        sx={{
-                            minHeight: 48,
-                            justifyContent: open ? 'initial' : 'center',
-                            px: 2.8,
-                        }}
-                    >
-                        <ListItemIcon
-                            sx={{
-                                minWidth: 0,
-                                mr: open ? 3 : 'auto',
-                                justifyContent: 'center',
-                            }}
-                        >
-                            <AiFillDashboard />
-                        </ListItemIcon>
-                        <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-                    </ListItemButton>
-                </ListItem>
-            ))}
-            <Divider />
             {['Shipment'].map((text) => (
                 <ListItem key={text} disablePadding sx={{ display: 'block' }}>
                     <ListItemButton
                         component={NavLink}
-                        to={'/shipment'}
+                        to={'/'}
                         sx={{
                             minHeight: 48,
                             justifyContent: open ? 'initial' : 'center',
@@ -192,30 +164,6 @@ export default function Menu({ open }: DrawerProps) {
                     ))}
                 </List>
             </Collapse>
-            {['Parameterization'].map((text) => (
-                <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-                    <ListItemButton
-                        component={NavLink}
-                        to={'/parameterization'}
-                        sx={{
-                            minHeight: 48,
-                            justifyContent: open ? 'initial' : 'center',
-                            px: 2.8,
-                        }}
-                    >
-                        <ListItemIcon
-                            sx={{
-                                minWidth: 0,
-                                mr: open ? 3 : 'auto',
-                                justifyContent: 'center',
-                            }}
-                        >
-                            <IoMdSettings />
-                        </ListItemIcon>
-                        <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-                    </ListItemButton>
-                </ListItem>
-            ))}
         </List>
     );
 }

@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { ShipmentModel } from "../../Models/Shipment";
+import { NewOrderFormModel } from "../../Models/NewOrderForm";
 
 const instance = axios.create({
   baseURL: "http://localhost:3000",
@@ -29,10 +30,18 @@ const handleError = (error: any) => {
 };
 
 const ShipmentAgent = {
-  get: () => requests.get<ShipmentModel[]>("/managers"),
-  getById: (id: number) => requests.get<ShipmentModel>(`/managers/${id}`),
+  get: () => requests.get<ShipmentModel[]>("/shipments"),
+  getById: (id: number) => requests.get<ShipmentModel>(`/shipments/${id}`),
+};
+
+const NewOrderFormAgent = {
+  submitOrder: (order: NewOrderFormModel) =>
+    requests.post("/orders", {
+      data: JSON.stringify(order),
+    }),
 };
 
 export const Agent = {
   shipment: ShipmentAgent,
+  newOrderForm: NewOrderFormAgent,
 };

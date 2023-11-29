@@ -2,13 +2,11 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { PageBody } from "./Components/PageBody/PageBody";
-import { Dashboard } from "./Pages/Dashboard/Dashboard";
 import Shipment from "./Pages/Shipment/Shipment";
 import { InvoicesClients } from "./Pages/Invoices/InvocesClients";
 import { InvoicesFarms } from "./Pages/Invoices/InvoicesFarms";
 import { AccountStatementClients } from "./Pages/AccountStatements/AccountStatementClients";
 import { AccountStatementFarms } from "./Pages/AccountStatements/AccountStatementFarms";
-import { Parameterization } from "./Pages/Parameterization/Parameterization";
 import { NewOrderForm } from "./Pages/NewOrderForm/NewOrderForm";
 import { store, StoreContext } from "./Data/Store";
 import "./index.css";
@@ -24,14 +22,6 @@ const router = createBrowserRouter([
       children: [
          {
             index: true,
-            element: (
-               <PageBody text={"DASHBOARD"}>
-                  <Dashboard />
-               </PageBody>
-            ),
-         },
-         {
-            path: "/shipment",
             element: (
                <PageBody text={"SHIPMENT"}>
                   <Shipment />
@@ -67,14 +57,6 @@ const router = createBrowserRouter([
             element: (
                <PageBody text={"ACCOUNT STATEMENT: FARMS"}>
                   <AccountStatementFarms />
-               </PageBody>
-            ),
-         },
-         {
-            path: "/parameterization",
-            element: (
-               <PageBody text={"PARAMETERIZATION"}>
-                  <Parameterization />
                </PageBody>
             ),
          },
