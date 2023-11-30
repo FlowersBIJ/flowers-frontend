@@ -22,120 +22,7 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 import { observer } from "mobx-react";
 import { ShipmentModel } from "../../Models/Shipment";
-
-function createData(data: Partial<ShipmentModel>): ShipmentModel {
-   return {
-      id: data.id || 0,
-      country: data.country || "",
-      flowerType: data.flowerType || "",
-      numberOfBoxes: data.numberOfBoxes || 0,
-      boxType: data.boxType || "",
-      variety: data.variety || "",
-      length: data.length || 0,
-      numberOfStems: data.numberOfStems || 0,
-      farm: data.farm || "",
-      releaseDate: data.releaseDate || "",
-      purchasePrice: data.purchasePrice || 0,
-      total: data.total || 0,
-      labeling: data.labeling || "",
-      cargoAgencia: data.cargoAgencia || "",
-      truck: data.truck || "",
-      difference: data.difference || "",
-      salePrice: data.salePrice || 0,
-      totalSales: data.totalSales || 0,
-      awb: data.awb || "",
-      invoice: data.invoice || "",
-      miami: data.miami || 0,
-      finalPriceInMiami: data.finalPriceInMiami || 0,
-      orderType: data.orderType || "",
-      manager: data.manager || "",
-      done: data.done || "",
-   };
-}
-
-const rows = [
-   createData({
-      id: 1,
-      country: "Test1",
-      flowerType: "Test1",
-      numberOfBoxes: 10,
-      boxType: "Test1",
-      variety: "Test1",
-      length: 30,
-      numberOfStems: 50,
-      farm: "Test1",
-      releaseDate: "2023-01-01",
-      purchasePrice: 100,
-      total: 1000,
-      labeling: "Test1",
-      cargoAgencia: "Test1",
-      truck: "Test1",
-      difference: "Test1",
-      salePrice: 150,
-      totalSales: 1500,
-      awb: "Test1",
-      invoice: "Test1",
-      miami: 120,
-      finalPriceInMiami: 1200,
-      orderType: "Test1",
-      manager: "Test1",
-      done: "Test1",
-   }),
-   createData({
-      id: 2,
-      country: "Test2",
-      flowerType: "Test2",
-      numberOfBoxes: 11,
-      boxType: "Test2",
-      variety: "Test2",
-      length: 31,
-      numberOfStems: 51,
-      farm: "Test2",
-      releaseDate: "2023-01-01",
-      purchasePrice: 101,
-      total: 1001,
-      labeling: "Test2",
-      cargoAgencia: "Test2",
-      truck: "Test2",
-      difference: "Test2",
-      salePrice: 151,
-      totalSales: 1501,
-      awb: "Test2",
-      invoice: "Test2",
-      miami: 121,
-      finalPriceInMiami: 1201,
-      orderType: "Test2",
-      manager: "Test2",
-      done: "Test2",
-   }),
-   createData({
-      id: 3,
-      country: "Test3",
-      flowerType: "Test3",
-      numberOfBoxes: 12,
-      boxType: "Test3",
-      variety: "Test3",
-      length: 32,
-      numberOfStems: 52,
-      farm: "Test3",
-      releaseDate: "2023-01-01",
-      purchasePrice: 102,
-      total: 1002,
-      labeling: "Test3",
-      cargoAgencia: "Test3",
-      truck: "Test3",
-      difference: "Test3",
-      salePrice: 152,
-      totalSales: 1502,
-      awb: "Test3",
-      invoice: "Test3",
-      miami: 122,
-      finalPriceInMiami: 1202,
-      orderType: "Test3",
-      manager: "Test3",
-      done: "Test3",
-   }),
-];
+import { useStore } from "../../Data/Store";
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
    if (b[orderBy] < a[orderBy]) {
@@ -389,7 +276,12 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
    );
 }
 
-export default function Shipment() {
+export const Shipment = observer(() => {
+   const {
+      OrderStore
+   } = useStore();
+
+
    const [order, setOrder] = React.useState<Order>("asc");
    const [orderBy, setOrderBy] =
       React.useState<keyof ShipmentModel>("numberOfBoxes");
@@ -485,7 +377,7 @@ export default function Shipment() {
                      rowCount={rows.length}
                   />
                   <TableBody>
-                     {visibleRows.map((row, index) => {
+                     {OrderStore.ord.map((row, index) => {
                         const isItemSelected = isSelected(row.id);
                         const labelId = `enhanced-table-checkbox-${index}`;
 
@@ -548,4 +440,4 @@ export default function Shipment() {
          />
       </Box>
    );
-}
+});

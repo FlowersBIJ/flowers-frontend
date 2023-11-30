@@ -1,5 +1,5 @@
-export type NewOrderFormModel = {
-  id: number;
+export type OrderForm = {
+  // id: number;
   country: string;
   cityOfDelivery: string;
   flowerType: string;
@@ -20,6 +20,7 @@ export type NewOrderFormModel = {
   totalSales: number;
   awb: string;
   invoice: string;
+  invoiceOur: string;
   miami: number;
   finalPriceInMiami: number;
   orderType: string;

@@ -17,14 +17,6 @@ export default function Menu({ open }: DrawerProps) {
     const [invoicesOpen, setInvoicesOpen] = useState(false);
     const [accountStatementsOpen, setAccountStatementsOpen] = useState(false);
 
-    const handleInvoicesClick = () => {
-        setInvoicesOpen(!invoicesOpen);
-    };
-
-    const handleAccountStatementsClick = () => {
-        setAccountStatementsOpen(!accountStatementsOpen);
-    };
-
     useEffect(() => {
         setInvoicesOpen(false);
         setAccountStatementsOpen(false);
@@ -66,104 +58,6 @@ export default function Menu({ open }: DrawerProps) {
                     </ListItemButton>
                 </ListItem>
             ))}
-
-            {/* Invoices Section */}
-            <ListItemButton
-                sx={{
-                    minHeight: 48,
-                    justifyContent: open ? 'initial' : 'center',
-                    px: 2.8,
-                }}
-                onClick={handleInvoicesClick}
-            >
-                <ListItemIcon
-                    sx={{
-                        minWidth: 0,
-                        mr: open ? 3 : 'auto',
-                        justifyContent: 'center',
-                    }}
-                >
-                    {invoicesOpen ? <IoMdSettings /> : <IoMdSettings style={{ opacity: 0.5 }} />}
-                </ListItemIcon>
-                <ListItemText primary={'Invoices'} sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
-            <Collapse in={invoicesOpen} timeout="auto" unmountOnExit>
-                <List component="div" disablePadding>
-                    {Ivoices.map((item) => (
-                        <ListItem key={item.text} disablePadding sx={{ display: 'block' }}>
-                            <ListItemButton
-                                component={NavLink}
-                                to={item.route}
-                                sx={{
-                                    minHeight: 48,
-                                    justifyContent: open ? 'initial' : 'center',
-                                    px: 4,
-                                }}
-                            >
-                                <ListItemIcon
-                                    sx={{
-                                        minWidth: 0,
-                                        mr: open ? 3 : 'auto',
-                                        justifyContent: 'center',
-                                    }}
-                                >
-                                    <IoMdSettings />
-                                </ListItemIcon>
-                                <ListItemText primary={item.text} sx={{ opacity: open ? 1 : 0 }} />
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
-                </List>
-            </Collapse>
-
-            {/* Account Statements Section */}
-            <ListItemButton
-                sx={{
-                    minHeight: 48,
-                    justifyContent: open ? 'initial' : 'center',
-                    px: 2.8,
-                }}
-                onClick={handleAccountStatementsClick}
-            >
-                <ListItemIcon
-                    sx={{
-                        minWidth: 0,
-                        mr: open ? 3 : 'auto',
-                        justifyContent: 'center',
-                    }}
-                >
-                    {accountStatementsOpen ? <IoMdSettings /> : <IoMdSettings style={{ opacity: 0.5 }} />}
-                </ListItemIcon>
-                <ListItemText primary={'Account statements'} sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
-            <Collapse in={accountStatementsOpen} timeout="auto" unmountOnExit>
-                <List component="div" disablePadding>
-                    {AccountStatements.map((item) => (
-                        <ListItem key={item.text} disablePadding sx={{ display: 'block' }}>
-                            <ListItemButton
-                                component={NavLink}
-                                to={item.route}
-                                sx={{
-                                    minHeight: 48,
-                                    justifyContent: open ? 'initial' : 'center',
-                                    px: 4,
-                                }}
-                            >
-                                <ListItemIcon
-                                    sx={{
-                                        minWidth: 0,
-                                        mr: open ? 3 : 'auto',
-                                        justifyContent: 'center',
-                                    }}
-                                >
-                                    <IoMdSettings />
-                                </ListItemIcon>
-                                <ListItemText primary={item.text} sx={{ opacity: open ? 1 : 0 }} />
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
-                </List>
-            </Collapse>
         </List>
     );
 }

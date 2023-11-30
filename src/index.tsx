@@ -2,12 +2,8 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { PageBody } from "./Components/PageBody/PageBody";
-import Shipment from "./Pages/Shipment/Shipment";
-import { InvoicesClients } from "./Pages/Invoices/InvocesClients";
-import { InvoicesFarms } from "./Pages/Invoices/InvoicesFarms";
-import { AccountStatementClients } from "./Pages/AccountStatements/AccountStatementClients";
-import { AccountStatementFarms } from "./Pages/AccountStatements/AccountStatementFarms";
-import { NewOrderForm } from "./Pages/NewOrderForm/NewOrderForm";
+import { Shipment } from "./Pages/Shipment/Shipment";
+import { NewOrderForm } from "./Pages/NewOrderForm/OrderForm";
 import { store, StoreContext } from "./Data/Store";
 import "./index.css";
 import { TextProvider } from "./Components/TextContext/TextContext";
@@ -25,38 +21,6 @@ const router = createBrowserRouter([
             element: (
                <PageBody text={"SHIPMENT"}>
                   <Shipment />
-               </PageBody>
-            ),
-         },
-         {
-            path: "/invoices-clients",
-            element: (
-               <PageBody text={"INVOICES: CLIENTS"}>
-                  <InvoicesClients />
-               </PageBody>
-            ),
-         },
-         {
-            path: "/invoices-farms",
-            element: (
-               <PageBody text={"INVOICES: FARMS"}>
-                  <InvoicesFarms />
-               </PageBody>
-            ),
-         },
-         {
-            path: "/account-statement-clients",
-            element: (
-               <PageBody text={"ACCOUNT STATEMENT: CLIENTS"}>
-                  <AccountStatementClients />
-               </PageBody>
-            ),
-         },
-         {
-            path: "/account-statement-farms",
-            element: (
-               <PageBody text={"ACCOUNT STATEMENT: FARMS"}>
-                  <AccountStatementFarms />
                </PageBody>
             ),
          },
