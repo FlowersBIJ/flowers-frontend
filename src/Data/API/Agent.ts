@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { ShipmentModel } from "../../Models/Shipment";
+import { Manager } from "../../Models/Manager";
 
 const instance = axios.create({
   baseURL: "http://localhost:3000",
@@ -40,7 +41,13 @@ const OrderFormAgent = {
     }),
 };
 
+const ManagerAgent = {
+  get: () => requests.get<Manager[]>("/managers"),
+  getById: (id: number) => requests.get<Manager>(`/managers/${id}`),
+};
+
 export const Agent = {
   shipment: ShipmentAgent,
   newOrderForm: OrderFormAgent,
+  manager: ManagerAgent,
 };

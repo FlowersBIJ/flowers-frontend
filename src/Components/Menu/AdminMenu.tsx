@@ -4,16 +4,15 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import Collapse from '@mui/material/Collapse';
 import { FaBox } from 'react-icons/fa';
-import { IoMdSettings } from 'react-icons/io';
+import { FaUsers } from "react-icons/fa";
 import { NavLink } from 'react-router-dom';
 
 interface DrawerProps {
     open: boolean;
 }
 
-export default function Menu({ open }: DrawerProps) {
+export default function AdminMenu({ open }: DrawerProps) {
     const [invoicesOpen, setInvoicesOpen] = useState(false);
     const [accountStatementsOpen, setAccountStatementsOpen] = useState(false);
 
@@ -53,6 +52,30 @@ export default function Menu({ open }: DrawerProps) {
                             }}
                         >
                             <FaBox />
+                        </ListItemIcon>
+                        <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                    </ListItemButton>
+                </ListItem>
+            ))}
+            {['Managers'].map((text) => (
+                <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+                    <ListItemButton
+                        component={NavLink}
+                        to={'/managers'}
+                        sx={{
+                            minHeight: 48,
+                            justifyContent: open ? 'initial' : 'center',
+                            px: 2.8,
+                        }}
+                    >
+                        <ListItemIcon
+                            sx={{
+                                minWidth: 0,
+                                mr: open ? 3 : 'auto',
+                                justifyContent: 'center',
+                            }}
+                        >
+                            <FaUsers />
                         </ListItemIcon>
                         <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
                     </ListItemButton>

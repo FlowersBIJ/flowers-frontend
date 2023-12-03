@@ -5,12 +5,9 @@ import Drawer from "./Components/Drawer/Drawer";
 import AppBar from "./Components/AppBar/AppBar";
 import { Outlet } from "react-router-dom";
 import { observer } from "mobx-react";
+import { UserRole } from "./Models/UserRole";
 
-interface AppProps {
-   userRole: string;
-}
-
-const App: React.FC<AppProps> = observer(({ userRole }) => {
+const App = observer(({ userRole }: { userRole: UserRole }) => {
    const [open, setOpen] = React.useState(false);
 
    const handleDrawerOpen = () => {
@@ -23,9 +20,7 @@ const App: React.FC<AppProps> = observer(({ userRole }) => {
    return (
       <Box sx={{ display: "flex" }}>
          <AppBar open={open} handleDrawerOpen={handleDrawerOpen} />
-         <Drawer open={open} handleDrawerClose={handleDrawerClose} />
-         {userRole === 'admin' && <AdminPanel />}
-         {userRole === 'manager' && <ManagerPanel />}
+         <Drawer open={open} handleDrawerClose={handleDrawerClose} userRole={userRole} />
          <Outlet />
       </Box>
    );

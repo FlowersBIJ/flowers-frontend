@@ -5,16 +5,19 @@ import IconButton from '@mui/material/IconButton';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import Typography from "@mui/material/Typography";
-import Menu from '../Menu/Menu';
+import ManagerMenu from '../Menu/ManagerMenu';
+import AdminMenu from '../Menu/AdminMenu';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { IoMdAdd } from "react-icons/io";
 import { NavLink } from 'react-router-dom';
+import { UserRole } from '../../Models/UserRole';
 import './Drawer.css'
 
 interface DrawerProps {
     open: boolean;
     handleDrawerClose: () => void;
+    userRole: UserRole;
 }
 
 const drawerWidth = 240;
@@ -68,7 +71,7 @@ const DrawerWrapper = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 
     }),
 );
 
-export default function Drawer({ open, handleDrawerClose }: DrawerProps) {
+export default function Drawer({ open, handleDrawerClose, userRole }: DrawerProps) {
     const theme = useTheme();
 
     return (
@@ -82,7 +85,8 @@ export default function Drawer({ open, handleDrawerClose }: DrawerProps) {
                     </IconButton>
                 </DrawerHeader>
                 <Divider />
-                <Menu open={open} />
+                {userRole === 'admin' && <AdminMenu open={open} />}
+                {userRole === 'manager' && <ManagerMenu open={open} />}
                 <Divider />
             </div>
             <div style={{ marginTop: 'auto', marginBottom: '30px' }} className="under-drawer">
