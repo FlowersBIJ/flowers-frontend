@@ -1,6 +1,6 @@
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { observer } from "mobx-react";
-import { useStore } from "../../Data/Store";
+import { useStore } from "../../Infra/Stores/Store";
 import { OrderForm } from "../../Models/OrderForm";
 import { Box, FormControl, FormGroup, TextField } from "@mui/material";
 import Button from "@mui/material/Button";

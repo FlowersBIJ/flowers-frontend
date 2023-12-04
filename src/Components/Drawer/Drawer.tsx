@@ -10,9 +10,11 @@ import AdminMenu from '../Menu/AdminMenu';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { IoMdAdd } from "react-icons/io";
-import { NavLink } from 'react-router-dom';
+import {Link, NavLink, useNavigate} from 'react-router-dom';
 import { UserRole } from '../../Models/UserRole';
 import './Drawer.css'
+import {IoLogOut} from "react-icons/io5";
+import {observer} from "mobx-react";
 
 interface DrawerProps {
     open: boolean;
@@ -71,15 +73,15 @@ const DrawerWrapper = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 
     }),
 );
 
-export default function Drawer({ open, handleDrawerClose, userRole }: DrawerProps) {
+export const Drawer = observer(({ open, handleDrawerClose, userRole }: DrawerProps) => {
     const theme = useTheme();
 
     return (
         <DrawerWrapper variant="permanent" open={open}>
             <div className="upper-drawer">
                 <DrawerHeader>
-                    <img className='logo-img' src={require("../../Assets/logo_awarmatu.png")} alt="logo" />
-                    <Typography >AWARMATU <br /> SYSTEM 23</Typography>
+                    <Link to={"/"}><img  className='logo-img' src={require("../../Assets/logo_awarmatu.png")} alt="logo" /></Link>
+                    <Typography >AWARMATU <br /> SYSTEM 2023</Typography>
                     <IconButton onClick={handleDrawerClose}>
                         {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
                     </IconButton>
@@ -115,4 +117,4 @@ export default function Drawer({ open, handleDrawerClose, userRole }: DrawerProp
             </div>
         </DrawerWrapper>
     )
-}
+});

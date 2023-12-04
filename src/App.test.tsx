@@ -7,7 +7,7 @@ import { UserRole } from "./Models/UserRole";
 test("renders learn react link", () => {
    render(
       <TextProvider>
-         <App userRole={UserRole.ADMIN} />,
+         <App />,
       </TextProvider>
    );
    const linkElement = screen.getByText(/learn react/i);

@@ -1,6 +1,6 @@
-import { Manager } from "../Models/Manager";
+import { Manager } from "../../Models/Manager";
 import { makeAutoObservable, runInAction } from "mobx";
-import { Agent } from "./API/Agent";
+import { Agent } from "../API/Agent";
 
 export class ManagerStore {
   managers: Manager[] = [];
