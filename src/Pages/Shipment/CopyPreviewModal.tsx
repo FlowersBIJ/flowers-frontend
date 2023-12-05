@@ -21,41 +21,46 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
+    width: 500,
     bgcolor: 'background.paper',
     border: '0px',
-    boxShadow: 24,
-    p: 4,
+    boxShadow: 24 ,
+    p: 2,
+    borderRadius: "20px",
 };
 
 type Props = {
     open: boolean;
     close: () => void;
     selectedValues: SelectedRow[];
+    textCopy:string;
 };
-export function CopyPreviewModal({open, close, selectedValues}: Props) {
-    const [toCopy, setToCopy] = useState<string>("test");
+export function CopyPreviewModal({open, close, selectedValues,textCopy}: Props) {
+    const [toCopy, setToCopy] = React.useState<string>("");
     const [copied, setCopied] = useState<boolean>(false);
 
     const copyToClipboard = () => {
         navigator.clipboard.writeText(toCopy).then(() => setCopied(true));
     }
-
-    useEffect(() => {
-        setToCopy("Test")
-    }, []);
+   
 
     return (
-        <Modal open={open} onClose={close} sx={{outline: 0}}>
+        <Modal open={open} onClose={close} sx={{ outline: 0 }}>
             <Card variant={"outlined"} sx={style}>
                 <CardContent sx={{ display: "flex", flexDirection: "column" }}>
-                <Typography variant="h6" component="h2">
-                    Copy to buffer
-                </Typography>
+                    <Typography variant="h6" component="h2" style={{ paddingBottom: '10px', fontWeight: '700', fontFamily: "initial" }}>
+                        Required text
+                    </Typography>
 
-                <TextareaAutosize minRows={3} cols={25} value={toCopy} onChange={(e) => setToCopy(e.target.value)}/>
+                    
+                    <TextareaAutosize style={{ borderRadius: '10px', padding: '10px', fontFamily: "initial", fontSize: "19px" }} minRows={5} cols={30} value={textCopy} onChange={(e) => setToCopy(e.target.value)} />
 
-                <IconButton onClick={() => copyToClipboard()}><IoCopy/></IconButton>
+                    <IconButton onClick={() => copyToClipboard()}>
+                        <Typography variant="h6" component="h2" style={{ paddingBottom: '10px', fontWeight: '700', fontFamily: "initial" }}>
+                            Required text
+                        </Typography>
+                        <IoCopy />
+                    </IconButton>
                 </CardContent>
             </Card>
         </Modal>

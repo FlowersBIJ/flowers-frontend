@@ -104,6 +104,7 @@ export const Shipment = observer(() => {
         React.useState<keyof ShipmentModel>("box_count");
     const [selected, setSelected] = React.useState<SelectedRow[]>([]);
     const [copyOpen, setCopyOpen] = React.useState<boolean>(false);
+    const [toCopy, setToCopy] = React.useState<string>("");
     const handleRequestSort = (
         event: React.MouseEvent<unknown>,
         property: keyof ShipmentModel
@@ -112,6 +113,20 @@ export const Shipment = observer(() => {
         setOrder(isAsc ? "desc" : "asc");
         setOrderBy(property);
     };
+    const handleCopy = () => {
+        const selection = window.getSelection();
+        if (selection) {
+            setToCopy(selection.toString());
+            setCopyOpen(true);
+        }
+    };
+
+      useEffect(() => {
+        document.addEventListener('copy', handleCopy);
+        return () => {
+            document.removeEventListener('copy', handleCopy);
+        };
+    }, []);
 
 
     const handleClick = (event: React.MouseEvent<unknown>, row: SelectedRow) => {
@@ -218,7 +233,7 @@ export const Shipment = observer(() => {
                 </TableContainer>
             </Paper>
 
-                <CopyPreviewModal close={() => setCopyOpen(false)} open={copyOpen} selectedValues={selected}/>
+                <CopyPreviewModal close={() => setCopyOpen(false)} open={copyOpen} selectedValues={selected} textCopy={toCopy}/>
 
         </Box>
 )
