@@ -3,7 +3,6 @@ import * as React from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import CustomTabPanel from './CustomTabPanel/CustomTabPanel';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
@@ -15,8 +14,6 @@ import Paper from '@mui/material/Paper';
 import {Button, Checkbox } from '@mui/material';
 import { observer } from 'mobx-react';
 import {useStore} from "../../Infra/Stores/Store";
-import {EntityType} from "../../Models/EntityType";
-import {isObject} from "util";
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -72,8 +69,8 @@ export const Managment = observer(() => {
         <Tabs value={currentEntity} onChange={(e, newCurrentEntity) => setCurrentEntity(newCurrentEntity)} aria-label="basic tabs example">
           {
             Object.keys(entities).map(
-                (entityType: string) => {
-                  return <Tab key={entityType} label={entityType} value={entityType}/>
+                (entityType: string, index) => {
+                  return <Tab key={index} label={entityType.replace("_", " ")} value={entityType}/>
                 }
             )
           }
@@ -88,8 +85,8 @@ export const Managment = observer(() => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {getCurrentEntities().map((row) => (
-            <StyledTableRow key={row.name}>
+          {getCurrentEntities().map((row, index) => (
+            <StyledTableRow key={index}>
               <StyledTableCell component="th" scope="row">
                 {row.name}
               </StyledTableCell>

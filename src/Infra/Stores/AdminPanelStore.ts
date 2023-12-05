@@ -1,10 +1,10 @@
 import {EntityType} from "../../Models/EntityType";
-import {action, makeAutoObservable, makeObservable, observable, runInAction} from "mobx";
+import {action, makeObservable, observable, runInAction} from "mobx";
 import {Agent} from "../API/Agent";
 
 
 export class AdminPanelStore {
-    entityTypes: string[] = ['agencies', 'box_types', 'clients', 'flower_lengths', 'flower_sorts', 'order_types', 'plantations', 'trucks'];
+    entityTypes: string[] = ['agencies', 'box_types', 'clients', 'flower_sorts', 'order_types', 'plantations', 'trucks'];
     currentEntity: string = this.entityTypes[0];
     entities: { [key: string]: EntityType[] } = {};
     loadingInitial: boolean = false;

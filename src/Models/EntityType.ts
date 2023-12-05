@@ -1,5 +1,5 @@
 export type EntityType = {
-    name: string;
+    label: string;
     visible: boolean;
 };
 

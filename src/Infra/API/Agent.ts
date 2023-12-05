@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { ShipmentModel } from "../../Models/Shipment";
+import {ClientModel, ShipmentModel} from "../../Models/Shipment";
 import { Manager } from "../../Models/Manager";
 import {EntityType} from "../../Models/EntityType";
 
@@ -31,7 +31,9 @@ const handleError = (error: any) => {
 };
 
 const ShipmentAgent = {
-  get: () => requests.get<ShipmentModel[]>("/shipments"),
+  get: () => {
+    return requests.get<ClientModel[]>("/api/v1/table?visible=true");
+  },
   getById: (id: number) => requests.get<ShipmentModel>(`/shipments/${id}`),
 };
 
