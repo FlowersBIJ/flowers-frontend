@@ -1,20 +1,20 @@
 import { observer } from "mobx-react";
-import {Box, Container} from "@mui/material";
-import {useMst} from "../../Infra/Models/Root";
-import React, {useMemo, useState} from "react";
-import {ReactGrid, Row} from "@silevis/reactgrid";
-import {columns, headCells} from "./CellTemplate";
-import {ClientModel} from "../../Infra/Models/ShipmentEntities/Client";
-import {AddCellButton} from "../../Components/NewEntityButtonCell/AddCellButton";
-import {NewOrderStoreModel} from "../../Infra/Models/NewOrderStore";
+import { Box, Container } from "@mui/material";
+import { useMst } from "../../Infra/Models/Root";
+import React, { useMemo, useState } from "react";
+import { ReactGrid, Row } from "@silevis/reactgrid";
+import { columns, headCells } from "./CellTemplate";
+import { ClientModel } from "../../Infra/Models/ShipmentEntities/Client";
+import { AddCellButton } from "../../Components/NewEntityButtonCell/AddCellButton";
+import { NewOrderStoreModel } from "../../Infra/Models/NewOrderStore";
 import Button from "@mui/material/Button";
 
 const createNewClientRow = (store: NewOrderStoreModel, additionalRows?: Row[]) => {
-        return [
-            headCells,
-            ...store.clients.flatMap(client => client.rows),
-            ...(additionalRows || [])
-        ]
+    return [
+        headCells,
+        ...store.clients.flatMap(client => client.rows),
+        ...(additionalRows || [])
+    ]
 }
 
 export const NewOrderForm = observer(() => {
@@ -58,18 +58,16 @@ export const NewOrderForm = observer(() => {
         <Box
             component={"form"}
             sx={{
-                '& > :not(style)': { m: 1, width: '25ch' },
+                '& > :not(style)': { m: 1, width: '15ch' },
             }}
         >
-            <ReactGrid columns={columns} rows={rows} stickyLeftColumns={4} enableRowSelection/>
-            <Container sx={{ display: "flex", gap: 10 }}>
-                {editing ? (<>
-                    <Button variant={"outlined"} onClick={() => saveData()}>Save</Button>
-                    <Button variant={"contained"} color={"error"} onClick={() => cancelData()}>Cancel</Button>
-                </>) : <AddCellButton buttons={[
-                    { label: "Add Cell", action: handleAddNewClient}
-                ]}/>}
-            </Container>
+            <ReactGrid columns={columns} rows={rows} stickyLeftColumns={4} enableRowSelection />
+            {editing ? (<>
+                <Button variant={"outlined"} onClick={() => saveData()}>Save</Button>
+                <Button variant={"contained"} color={"error"} onClick={() => cancelData()}>Cancel</Button>
+            </>) : <AddCellButton buttons={[
+                { label: "Add Cell", action: handleAddNewClient }
+            ]} />}
         </Box>
     );
 });
