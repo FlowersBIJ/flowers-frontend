@@ -20,79 +20,92 @@ export const Client = types.model({
     changeVisibility(newVisibility: boolean): void {
         self.visible = newVisibility;
     }
+})).views(self => ({
+    get rows(): Row[] {
+        return []
+    },
+    get length(): number {
+        return this.rows.length;
+    }
 }));
 
 export const ClientStore = types.model("ClientStore", {
    clients: types.array(Client)
 }).views(self => ({
-    getRows(): Row[] {
+    getShipmentRows(): Row[] {
         let rowId = 0;
-        let rows: Row[] = [];
-        self.clients.forEach(
-            client => client.orders.forEach(
-                order => order.boxes.forEach(
-                    box => box.flowers.forEach(
-                        flower => rows.push({
+        return self.clients.flatMap(
+            client => client.orders.flatMap(
+                order => order.boxes.flatMap(
+                    box => box.flowers.flatMap(
+                        flower => ({
                             rowId:rowId++,
                             reorderable: true,
                             cells: [
                                     {
                                         type: "text",
                                         text: order.manager.name,
+                                        nonEditable: true,
                                     },
                                     {
-                                        type: "dropdown",
-                                        selectedValue: order.status.name,
-                                        values: order.status.getAllEntities(),
+                                        type: "text",
+                                        text: order.status.name,
+                                        nonEditable: true,
                                     },
                                     {
                                       type: "text",
                                       text: flower.comment,
+                                        nonEditable: true,
                                     },
                                 {
-                                    type: "dropdown",
-                                    selectedValue: flower.flowerType.name,
-                                    values: flower.flowerType.getAllEntities()
+                                    type: "text",
+                                    text: flower.flowerType.name,
+                                    nonEditable: true,
                                 },
                                 {
                                     type: "number",
                                     value: order.numberOfBoxes,
+                                    nonEditable: true,
                                 },
                                 {
-                                    type: "dropdown",
-                                    selectedValue: box.boxType.name,
-                                    values: box.boxType.getAllEntities()
+                                    type: "text",
+                                    text: box.boxType.name,
+                                    nonEditable: true,
                                 },
                                 {
-                                    type: "dropdown",
-                                    selectedValue: flower.flowerVariety.name,
-                                    values: flower.flowerVariety.getAllEntities()
+                                    type: "text",
+                                    text: flower.flowerVariety.name,
+                                    nonEditable: true,
                                 },
                                 {
                                     type: "number",
                                     value: flower.numberOfStems,
+                                    nonEditable: true,
                                 },
                                 {
-                                    type: "dropdown",
-                                    selectedValue: box.farm.name,
-                                    values: box.farm.getAllEntities(),
+                                    type: "text",
+                                    text: box.farm.name,
+                                    nonEditable: true,
                                 },
                                 {
                                     type: "date",
                                     date: order.releaseDate,
+                                    nonEditable: true,
                                 },
                                 {
                                     type: "number",
                                     value: flower.purchasePrice,
+                                    nonEditable: true,
                                 },
                                 {
                                     type: "number",
                                     value: flower.totalPrice,
+                                    nonEditable: true,
                                 },
                                 {
-                                        type: "dropdown",
-                                        selectedValue: client.client.labelling,
-                                        values: client.client.getAllEntities()
+                                        type: "text",
+                                        text: client.client.labelling,
+                                    nonEditable: true,
                                 },
                                 {
                                     type: "text",
@@ -106,43 +119,53 @@ export const ClientStore = types.model("ClientStore", {
                                 },
                                 {
                                     type: "number",
-                                    value: flower.difference
+                                    value: flower.difference,
+                                    nonEditable: true,
                                 },
                                 {
                                     type: "number",
-                                    value: flower.salePrice
+                                    value: flower.salePrice,
+                                    nonEditable: true,
                                 },
                                 {
                                     type: "number",
-                                    value: flower.totalSalePrice
+                                    value: flower.totalSalePrice,
+                                    nonEditable: true,
                                 },
                                 {
                                     type: "text",
-                                    text: box.awb
+                                    text: box.awb,
+                                    nonEditable: true,
                                 },
                                 {
                                     type: "text",
-                                    text: order.invoice
+                                    text: order.invoice,
+                                    nonEditable: true,
                                 },
                                 {
                                     type: 'text',
-                                    text: box.invoiceOur
+                                    text: box.invoiceOur,
+                                    nonEditable: true,
                                 },
                                 {
                                     type: "number",
-                                    value: flower.finalPriceInMiami || 0
+                                    value: flower.finalPriceInMiami || 0,
+                                    nonEditable: true,
                                 },
                                 {
                                     type: "text",
-                                    text: order.type.name
+                                    text: order.type.name,
+                                    nonEditable: true,
                                 },
                                 {
                                     type: "text",
                                     text: client.client.country.name,
+                                    nonEditable: true,
                                 },
                                 {
                                     type: "text",
                                     text: client.client.city.name,
+                                    nonEditable: true,
                                 }
                             ]
                         })
@@ -150,7 +173,6 @@ export const ClientStore = types.model("ClientStore", {
                 )
             )
         )
-        return rows;
     }
 })).actions(self => ({
     addClient(client: Instance<typeof Client>) {
@@ -161,3 +183,6 @@ export const ClientStore = types.model("ClientStore", {
         self.clients.push(client);
     }
 }));
+
+
+export type ClientModel = Instance<typeof Client>;

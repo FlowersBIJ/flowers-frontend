@@ -25,7 +25,7 @@ export const Shipment = observer(() => {
         ()   => {
             return [
                 headCells,
-                ...clientStore.getRows(),
+                ...clientStore.getShipmentRows(),
 
             ];
         },
