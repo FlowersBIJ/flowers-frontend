@@ -4,12 +4,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { PageBody } from "./Components/PageBody/PageBody";
 import { Shipment } from "./Pages/Shipment/Shipment";
 import { NewOrderForm } from "./Pages/NewOrderForm/OrderForm";
-import { Managers } from "./Pages/Managers/Managers";
 import "./index.css";
 import { TextProvider } from "./Components/TextContext/TextContext";
-import { Managment } from "./Pages/Management/Managment";
 import { Provider, rootStore } from "./Infra/Models/Root";
-import { Navigate } from "react-router-dom";
 
 const router = createBrowserRouter([
     {
@@ -33,25 +30,6 @@ const router = createBrowserRouter([
                         <NewOrderForm />
                     </PageBody>
                 ),
-            },
-            {
-                path: "/managers",
-                element: (
-                    <PageBody text={"MANAGERS"}>
-                        <Managers />
-                    </PageBody>
-                ),
-            },
-            // {
-            //     path: "/admin_panel",
-            //     element: (
-            //         <PageBody text={"ADMIN PANEL"}>
-            //             <Managment />
-            //         </PageBody>
-            //     )
-            // },
-            {
-                path: "/admin",
             },
         ],
     },

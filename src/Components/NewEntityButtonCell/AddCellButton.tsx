@@ -3,7 +3,16 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 
-export const AddCellButton = () => {
+interface ButtonAction {
+    label: string;
+    action: () => void;
+};
+
+type Props = {
+    buttons: ButtonAction[];
+};
+
+export const AddCellButton = (props: Props) => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
 
@@ -42,10 +51,14 @@ export const AddCellButton = () => {
                     'aria-labelledby': 'basic-button',
                 }}
             >
-                <MenuItem onClick={handleClose}>Client</MenuItem>
-                <MenuItem onClick={handleClose}>Order</MenuItem>
-                <MenuItem onClick={handleClose}>Box</MenuItem>
-                <MenuItem onClick={handleClose}>Flower</MenuItem>
+                {
+                    props.buttons.map(
+                        (action, index) => <MenuItem key={index} onClick={() => {
+                            action.action();
+                            handleClose();
+                        }}>{action.label}</MenuItem>
+                    )
+                }
             </Menu>
         </div>
     );

@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -14,23 +13,6 @@ interface DrawerProps {
 }
 
 export default function AdminMenu({ open }: DrawerProps) {
-    const [invoicesOpen, setInvoicesOpen] = useState(false);
-    const [accountStatementsOpen, setAccountStatementsOpen] = useState(false);
-
-    useEffect(() => {
-        setInvoicesOpen(false);
-        setAccountStatementsOpen(false);
-    }, [open]);
-
-    const Ivoices = [
-        { text: 'Clients', route: '/invoices-clients' },
-        { text: 'Farms', route: '/invoices-farms' },
-    ];
-
-    const AccountStatements = [
-        { text: 'Clients', route: '/account-statement-clients' },
-        { text: 'Farms', route: '/account-statement-farms' },
-    ];
 
     return (
         <List>

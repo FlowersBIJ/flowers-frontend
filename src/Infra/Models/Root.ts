@@ -1,13 +1,15 @@
 import {Instance, types} from "mobx-state-tree";
 import {DropdownStore} from "./DropdownEntities";
-import {Client, ClientStore} from "./ShipmentEntities/Client";
+import {ClientStore} from "./ShipmentEntities/Client";
 import {ManagerStore} from "./Manager";
 import {createContext, useContext} from "react";
+import {NewOrderStore} from "./NewOrderStore";
 
 const RootModel = types.model({
     managerStore: ManagerStore,
     dropdownStore: DropdownStore,
-    clientStore: ClientStore
+    clientStore: ClientStore,
+    newOrderStore: NewOrderStore
 });
 
 const managerStore = ManagerStore.create({
@@ -160,7 +162,10 @@ export const rootStore = RootModel.create({
             //         ]
             //     }
             ]
-        }
+        },
+    newOrderStore: {
+            clients: []
+    }
     }
 );
 
