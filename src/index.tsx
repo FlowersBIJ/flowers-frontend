@@ -1,27 +1,28 @@
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import {PageBody} from "./Components/PageBody/PageBody";
-import {Shipment} from "./Pages/Shipment/Shipment";
-import {NewOrderForm} from "./Pages/NewOrderForm/OrderForm";
-import {Managers} from "./Pages/Managers/Managers";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { PageBody } from "./Components/PageBody/PageBody";
+import { Shipment } from "./Pages/Shipment/Shipment";
+import { NewOrderForm } from "./Pages/NewOrderForm/OrderForm";
+import { Managers } from "./Pages/Managers/Managers";
 import "./index.css";
-import {TextProvider} from "./Components/TextContext/TextContext";
-import {Managment} from "./Pages/Management/Managment";
-import {Provider, rootStore} from "./Infra/Models/Root";
+import { TextProvider } from "./Components/TextContext/TextContext";
+import { Managment } from "./Pages/Management/Managment";
+import { Provider, rootStore } from "./Infra/Models/Root";
+import { Navigate } from "react-router-dom";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: (
-                    <App/>
+            <App />
         ),
         children: [
             {
                 index: true,
                 element: (
                     <PageBody text={"SHIPMENT"}>
-                        <Shipment/>
+                        <Shipment />
                     </PageBody>
                 ),
             },
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
                 path: "/new-order",
                 element: (
                     <PageBody text={"NEW ORDER"}>
-                        <NewOrderForm/>
+                        <NewOrderForm />
                     </PageBody>
                 ),
             },
@@ -37,18 +38,21 @@ const router = createBrowserRouter([
                 path: "/managers",
                 element: (
                     <PageBody text={"MANAGERS"}>
-                        <Managers/>
+                        <Managers />
                     </PageBody>
                 ),
             },
+            // {
+            //     path: "/admin_panel",
+            //     element: (
+            //         <PageBody text={"ADMIN PANEL"}>
+            //             <Managment />
+            //         </PageBody>
+            //     )
+            // },
             {
-                path: "/admin_panel",
-                element: (
-                    <PageBody text={"ADMIN PANEL"}>
-                        <Managment/>
-                    </PageBody>
-                )
-            }
+                path: "/admin",
+            },
         ],
     },
 ]);
@@ -60,7 +64,7 @@ const root = ReactDOM.createRoot(
 root.render(
     <Provider value={rootStore}>
         <TextProvider>
-            <RouterProvider router={router}/>
+            <RouterProvider router={router} />
         </TextProvider>
     </Provider>
 );

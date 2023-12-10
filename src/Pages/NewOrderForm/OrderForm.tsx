@@ -1,11 +1,12 @@
 import { observer } from "mobx-react";
-import {Box} from "@mui/material";
-import {useMst} from "../../Infra/Models/Root";
+import { Box } from "@mui/material";
+import { useMst } from "../../Infra/Models/Root";
 import React from "react";
-import {ReactGrid, Row} from "@silevis/reactgrid";
-import {columns, headCells} from "./CellTemplate";
-import {Instance} from "mobx-state-tree";
-import {ClientModel} from "../../Infra/Models/ShipmentEntities/Client";
+import { ReactGrid, Row } from "@silevis/reactgrid";
+import { columns, headCells } from "./CellTemplate";
+import { Instance } from "mobx-state-tree";
+import { ClientModel } from "../../Infra/Models/ShipmentEntities/Client";
+import { AddCellButton } from "../../Components/NewEntityButtonCell/AddCellButton";
 
 interface IOrder {
     manager: string;
@@ -15,22 +16,6 @@ interface IOrder {
     truck: string;
     country: string;
     city: string;
-}
-
-const newEntityButtonRow = (clients: ClientModel[], onSubmit: () => void): Row => {
-    let rowId = 1;
-    clients.forEach( client => rowId += client.length);
-
-    return {
-        rowId: rowId,
-        reorderable: false,
-        cells: [
-            {
-                type: "newEntityButton",
-                onSubmit: onSubmit
-            }
-        ]
-    }
 }
 
 export const NewOrderForm = observer(() => {
@@ -58,8 +43,7 @@ export const NewOrderForm = observer(() => {
     const getRows = (): Row[] => {
         return [
             headCells,
-        ...currentClients.flatMap(client => client.rows),
-           newEntityButtonRow(currentClients, handleAddNewEntity)
+            ...currentClients.flatMap(client => client.rows),
         ]
     }
 
@@ -70,6 +54,7 @@ export const NewOrderForm = observer(() => {
                 '& > :not(style)': { m: 1, width: '25ch' },
             }}
         >
+            <AddCellButton />
             {/*    <FormSelect control={control} name={'status'} defaultValue={'created'} values={dropdownStore.getEntities("order_status")}/>*/}
             {/*    <FormSelect control={control} name={'labeling'} defaultValue={''} values={dropdownStore.getEntities("client")} onChange={onClientChange}/>*/}
             {/*/!* onSubmit={handleSubmit(submitHandler)} *!/*/}
@@ -155,7 +140,7 @@ export const NewOrderForm = observer(() => {
             {/*    />*/}
             {/*    <Button className="btnNextStep" variant={"contained"} type={"submit"} >Sumbit</Button>*/}
 
-            <ReactGrid columns={columns} rows={getRows()} stickyLeftColumns={4} enableRowSelection/>
+            <ReactGrid columns={columns} rows={getRows()} stickyLeftColumns={4} enableRowSelection />
         </Box>
     );
 });

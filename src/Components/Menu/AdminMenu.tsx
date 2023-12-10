@@ -7,7 +7,7 @@ import ListItemText from '@mui/material/ListItemText';
 import { FaBox } from 'react-icons/fa';
 import { FaUsers } from "react-icons/fa";
 import { NavLink } from 'react-router-dom';
-import {IoDesktop} from "react-icons/io5";
+import { IoDesktop } from "react-icons/io5";
 
 interface DrawerProps {
     open: boolean;
@@ -61,7 +61,7 @@ export default function AdminMenu({ open }: DrawerProps) {
             <ListItem key={"Admin Panel"} disablePadding sx={{ display: 'block' }}>
                 <ListItemButton
                     component={NavLink}
-                    to={'/admin_panel'}
+                    to={'/admin'}
                     sx={{
                         minHeight: 48,
                         justifyContent: open ? 'initial' : 'center',

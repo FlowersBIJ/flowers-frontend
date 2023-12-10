@@ -1,6 +1,6 @@
-import {Cell} from "@silevis/reactgrid";
+import { Cell } from "@silevis/reactgrid";
 
 export interface NewEntityButtonCell extends Cell {
-    type: "newEntityButton";
-    onSubmit: () => void;
+  type: "newEntityButton";
+  onSubmit: () => void;
 }
