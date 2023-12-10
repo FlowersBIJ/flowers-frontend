@@ -1,7 +1,6 @@
 import axios, { AxiosResponse } from "axios";
-import {ClientModel, ShipmentModel} from "../../Models/Shipment";
-import { Manager } from "../../Models/Manager";
-import {EntityType} from "../../Models/EntityType";
+import {ClientModel, ShipmentModel} from "../Models/Shipment";
+import {IDropdownEntity, IManager} from "../Models/dto";
 
 const instance = axios.create({
   baseURL: "http://localhost:8000",
@@ -34,6 +33,7 @@ const ShipmentAgent = {
   get: () => {
     return requests.get<ClientModel[]>("/api/v1/table?visible=true");
   },
+
   getById: (id: number) => requests.get<ShipmentModel>(`/shipments/${id}`),
 };
 
@@ -45,18 +45,22 @@ const OrderFormAgent = {
 };
 
 const ManagerAgent = {
-  get: () => requests.get<Manager[]>("/managers"),
-  getById: (id: number) => requests.get<Manager>(`/managers/${id}`),
+  get: () => requests.get<IManager[]>("/managers"),
+  getById: (id: number) => requests.get<IManager>(`/managers/${id}`),
+};
+
+const DropdownAgent = {
+  getByName: async (name: string) => await requests.get<IDropdownEntity[]>(`/dropdown/${name}`)
+
 };
 
 const EntityAgent = {
   getAllEntities: async (entityTypes: string[]) => {
-    let entities: {[key: string]: EntityType[]} = {};
+    let entities: {[key: string]: IDropdownEntity[]} = {};
 
     for (const entityType of entityTypes) {
       const data = await requests.get(`/api/v1/${entityType}`);
 
-      console.log(data);
       // @ts-ignore
       entities[entityType] = data[entityType];
     }
@@ -68,5 +72,6 @@ export const Agent = {
   shipment: ShipmentAgent,
   newOrderForm: OrderFormAgent,
   manager: ManagerAgent,
-  entity: EntityAgent
+  entity: EntityAgent,
+  dropdown: DropdownAgent
 };

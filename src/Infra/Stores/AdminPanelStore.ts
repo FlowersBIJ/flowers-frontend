@@ -1,12 +1,12 @@
-import {EntityType} from "../../Models/EntityType";
 import {action, makeObservable, observable, runInAction} from "mobx";
 import {Agent} from "../API/Agent";
+import {IDropdownEntity} from "../Models/dto";
 
 
 export class AdminPanelStore {
     entityTypes: string[] = ['agencies', 'box_types', 'clients', 'flower_sorts', 'order_types', 'plantations', 'trucks'];
     currentEntity: string = this.entityTypes[0];
-    entities: { [key: string]: EntityType[] } = {};
+    entities: { [key: string]: IDropdownEntity[] } = {};
     loadingInitial: boolean = false;
 
     constructor() {
@@ -49,7 +49,7 @@ export class AdminPanelStore {
         this.currentEntity = entityType;
     }
 
-    getCurrentEntities = (): EntityType[] => {
+    getCurrentEntities = (): IDropdownEntity[] => {
         if (this.entities.hasOwnProperty(this.currentEntity)) {
             return this.entities[this.currentEntity];
         }

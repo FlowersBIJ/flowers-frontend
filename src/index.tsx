@@ -5,10 +5,10 @@ import {PageBody} from "./Components/PageBody/PageBody";
 import {Shipment} from "./Pages/Shipment/Shipment";
 import {NewOrderForm} from "./Pages/NewOrderForm/OrderForm";
 import {Managers} from "./Pages/Managers/Managers";
-import {store, StoreContext} from "./Infra/Stores/Store";
 import "./index.css";
 import {TextProvider} from "./Components/TextContext/TextContext";
 import {Managment} from "./Pages/Management/Managment";
+import {Provider, rootStore} from "./Infra/Models/Root";
 
 const router = createBrowserRouter([
     {
@@ -58,9 +58,9 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-    <StoreContext.Provider value={store}>
+    <Provider value={rootStore}>
         <TextProvider>
             <RouterProvider router={router}/>
         </TextProvider>
-    </StoreContext.Provider>
+    </Provider>
 );

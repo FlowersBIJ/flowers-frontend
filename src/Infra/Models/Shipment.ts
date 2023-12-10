@@ -18,11 +18,11 @@ export type Invoice = {
 }
 
 export type BoxModel = {
-  release_date: string;
+  release_date: Date;
   box_count: number;
   box_type: string,
   invoice: Invoice,
-    flowers: FlowerModel[]
+  flowers: FlowerModel[]
 }
 
 export type OrderModel = {
@@ -76,4 +76,7 @@ export type ShipmentModel = {
   city: string;
   agencie: string;
   truck: string;
+
+  // Generic
+  done: boolean;
 };

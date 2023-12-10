@@ -11,7 +11,7 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { IoMdAdd } from "react-icons/io";
 import {Link, NavLink, useNavigate} from 'react-router-dom';
-import { UserRole } from '../../Models/UserRole';
+import { UserRole } from '../../Infra/Models/UserRole';
 import './Drawer.css'
 import {IoLogOut} from "react-icons/io5";
 import {observer} from "mobx-react";

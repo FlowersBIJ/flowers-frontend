@@ -5,8 +5,8 @@ import {Drawer} from "./Components/Drawer/Drawer";
 import AppBar from "./Components/AppBar/AppBar";
 import {Outlet} from "react-router-dom";
 import {observer} from "mobx-react";
-import {UserRole} from "./Models/UserRole";
-import {useStore} from "./Infra/Stores/Store";
+import {UserRole} from "./Infra/Models/UserRole";
+import "@silevis/reactgrid/styles.css";
 
 const App = observer(() => {
    const [open, setOpen] = React.useState(false);

@@ -7,8 +7,8 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 import * as React from "react";
 import {observer} from "mobx-react";
 import {alpha} from "@mui/material";
-import {ShipmentModel} from "../../Models/Shipment";
-import { SelectedRow } from "../../Models/types";
+import {ShipmentModel} from "../../Infra/Models/Shipment";
+import { SelectedRow } from "../../Infra/Models/types";
 import {IoCopy} from "react-icons/io5";
 import { Fragment } from "react";
 

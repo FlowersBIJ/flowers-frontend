@@ -1,18 +1,14 @@
 // @flow 
 import * as React from 'react';
 import {
-    Box,
     Card,
     CardContent,
-    CardHeader,
-    Dialog,
     IconButton,
     Modal,
     TextareaAutosize,
-    TextField,
     Typography
 } from "@mui/material";
-import {SelectedRow} from "../../Models/types";
+import {SelectedRow} from "../../Infra/Models/types";
 import {IoCopy} from "react-icons/io5";
 import {useEffect, useState} from "react";
 
